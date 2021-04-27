@@ -54,3 +54,50 @@ def setRandomImage():
     cv2.imshow("demo", img)
     cv2.waitKey()
     cv2.destroyAllWindows()
+
+
+def cutCenterImage():
+    img = cv2.imread("fox.jpeg", cv2.IMREAD_REDUCED_COLOR_2)
+    center = img[20:400, 50:350]
+    cv2.imshow("demo", center)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+
+
+def captchaImage():
+    img = cv2.imread("fox.jpeg", cv2.IMREAD_REDUCED_COLOR_2)
+    ROI = np.random.randint(0, 256, (180, 100, 3))
+    img[220:400, 250:350] = ROI
+    cv2.imshow("fox", img)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+
+
+def channelSplit():
+    fox = cv2.imread("fox.jpeg", cv2.IMREAD_REDUCED_COLOR_2)
+    # b = fox[:, :, 0]
+    # g = fox[:, :, 1]
+    # r = fox[:, :, 2]
+    b, g, r = cv2.split(fox)
+    cv2.imshow("B", b)
+    cv2.imshow("G", g)
+    cv2.imshow("R", r)
+    fox[:, :, 0] = 0
+    cv2.imshow("b0", fox)
+    fox[:, :, 1] = 0
+    cv2.imshow("b0g0", fox)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+
+
+def channelMerge():
+    fox = cv2.imread("fox.jpeg", cv2.IMREAD_REDUCED_COLOR_2)
+    b, g, r = cv2.split(fox)
+    bgr = cv2.merge([b, g, r])
+    rgb = cv2.merge([r, g, b])
+    gbr = cv2.merge([g, b, r])
+    cv2.imshow("BGR", bgr)
+    cv2.imshow("RGB", rgb)
+    cv2.imshow("GBR", gbr)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
